@@ -13,10 +13,9 @@ const onUpload = () => {
         <div class="col-12">
             <div class="card">
                 <h5>Advanced</h5>
+              <img src="http://127.0.0.1:5000/image/test.jpg" alt="">
                 <FileUpload name="demo[]" @uploader="onUpload" :multiple="true" accept="image/*" :maxFileSize="1000000" customUpload />
 
-                <h5>Basic</h5>
-                <FileUpload mode="basic" name="demo[]" accept="image/*" :maxFileSize="1000000" @uploader="onUpload" customUpload />
             </div>
         </div>
         <Toast />
