@@ -1,27 +1,13 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import ProductService from '@/service/ProductService';
-ref([
-  [
-    { name: 'San Francisco', code: 'SF' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Paris', code: 'PRS' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Berlin', code: 'BRL' },
-    { name: 'Barcelona', code: 'BRC' },
-    { name: 'Rome', code: 'RM' }
-  ],
-  []
-]);
-ref([
-  { name: 'San Francisco', code: 'SF' },
-  { name: 'London', code: 'LDN' },
-  { name: 'Paris', code: 'PRS' },
-  { name: 'Istanbul', code: 'IST' },
-  { name: 'Berlin', code: 'BRL' },
-  { name: 'Barcelona', code: 'BRC' },
-  { name: 'Rome', code: 'RM' }
-]);
+import CoreService from '@/service/coreService'
+import { useToast } from "primevue/usetoast";
+
+const coreService = new CoreService();
+const results = ref(null)
+let componentKey= 0
+const toast = useToast();
 const dataviewValue = ref(null);
 const layout = ref('grid');
 const sortKey = ref(null);
@@ -41,7 +27,13 @@ onMounted(() => {
     },100)
 
 });
+const delAll = ()=>{
+  coreService.delAllImg().then((data)=>{
 
+    toast.add({ severity: "info", summary: "Success", detail: "删除成功", life: 3000 });
+  })
+  componentKey +=1
+}
 const onSortChange = (event) => {
     const value = event.value.value;
     const sortValue = event.value;
@@ -63,11 +55,11 @@ const onSortChange = (event) => {
         <div class="col-12">
             <div class="card">
                 <h5>图库</h5>
-                <DataView :value="dataviewValue" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField">
+                <DataView :value="dataviewValue" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField" :key="componentKey">
                     <template #header>
                         <div class="grid grid-nogutter">
                             <div class="col-6 text-left">
-                                <Dropdown v-model="sortKey" :options="sortOptions" optionLabel="label" placeholder="Sort By Date" @change="onSortChange($event)" />
+                              <Button icon="pi pi-trash" label="全部删除" @click="delAll" raised />
                             </div>
                             <div class="col-6 text-right">
                                 <DataViewLayoutOptions v-model="layout" />
@@ -83,7 +75,7 @@ const onSortChange = (event) => {
                                     <div class="mb-3">{{ slotProps.data.description }}</div>
                                 </div>
                                 <div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
-                                    <Button icon="pi pi-trash" label="del" :disabled="false" class="mb-2"></Button>
+                                    <Button icon="pi pi-trash" label="删除" :disabled="false" class="mb-2"></Button>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +84,7 @@ const onSortChange = (event) => {
                     <template #grid="slotProps">
                         <div class="col-12 md:col-4">
                             <div class="card m-3 border-1 surface-border">
-                                <div class="text-center">
+                                <div class="text-center img">
                                     <img :src="slotProps.data.image" :alt="slotProps.data.name" class="w-9 shadow-2 my-3 mx-0 img" />
                                     <div class="mb-3">{{ slotProps.data.description }}</div>
                                 </div>
@@ -110,8 +102,9 @@ const onSortChange = (event) => {
 
     </div>
 </template>
-<style scoped>
+<style lang="css" scoped>
 .img {
-  width:100%
+  width:100%;
+  margin:0;
 }
 </style>

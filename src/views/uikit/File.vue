@@ -12,10 +12,8 @@ const onUpload = () => {
     <div class="grid">
         <div class="col-12">
             <div class="card">
-                <h5>Advanced</h5>
-              <img src="http://127.0.0.1:5000/image/test.jpg" alt="">
-                <FileUpload name="demo[]" @uploader="onUpload" :multiple="true" accept="image/*" :maxFileSize="1000000" customUpload />
-
+                <h5>图片上传</h5>
+                <FileUpload name="image" url="http://127.0.0.1:5000/api/upload" @uploader="onUpload" :multiple="true" accept="image/*" :maxFileSize="1000000"/>
             </div>
         </div>
         <Toast />

@@ -9,4 +9,9 @@ export default class CoreService {
       .then((res) => res.json())
       .then((d) => d.data);
   }
+  delAllImg(){
+    return fetch('http://127.0.0.1:5000/api/delAllimg')
+      .then((res) => res.json())
+      .then((d) => d.data);
+  }
 }

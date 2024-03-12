@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from 'vue';
-import ProductService from '@/service/ProductService';
 import CoreService from '@/service/coreService'
 import Splitter from 'primevue/splitter';
 import SplitterPanel from 'primevue/splitterpanel';
@@ -22,7 +21,7 @@ const state = reactive({
 let componentKey= 0
 
 onMounted(() => {
-  console.log(state.isDone);
+
 });
 
 
@@ -142,8 +141,6 @@ const run = ()=>{
             </div>
           </template>
         </FileUpload>
-
-
     </SplitterPanel>
     <SplitterPanel class="flex flex-column align-items-center justify-content-center imgs" :size="75" :key="componentKey">
       <div v-if="state.isDone===1">请上传匹配图片</div>

@@ -5,19 +5,18 @@ import AppMenuItem from "./AppMenuItem.vue";
 
 const model = ref([
   {
-    label: "Home",
-    items: [{ label: "Dashboard", icon: "pi pi-fw pi-home", to: "/" }]
+    label: "主页",
+    items: [{ label: "特征匹配", icon: "pi pi-fw pi-home", to: "/" }]
   },
   {
-    label: "UI Components",
+    label: "系统功能",
     items: [
-      { label: "images", icon: "pi pi-fw pi-images", to: "/uikit/list" },
-      { label: "uploadFile", icon: "pi pi-fw pi-file", to: "/uikit/file" },
-      { label: "PrimeIcons", icon: "pi pi-fw pi-prime", to: "/utilities/icons" }
+      { label: "图库", icon: "pi pi-fw pi-images", to: "/uikit/list" },
+      { label: "上传文件", icon: "pi pi-fw pi-file", to: "/uikit/file" },
     ]
   },
 
-  {
+  /*{
     label: "Pages",
     icon: "pi pi-fw pi-briefcase",
     to: "/pages",
@@ -49,7 +48,7 @@ const model = ref([
         to: "/pages/crud"
       },
     ]
-  },
+  },*/
 ]);
 </script>
 
